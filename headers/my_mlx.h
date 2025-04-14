@@ -32,3 +32,4 @@ enum colors
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	my_mlx_draw_line(t_data *data, t_coord *coord, int color);
 void	my_mlx_draw_square(t_data *data, t_coord *coord, int size, int color);
+void	my_mlx_draw_tester(t_data data);

@@ -6,12 +6,14 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 20:01:48 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/09 15:22:45 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/14 18:47:48 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+
+#include <stdbool.h>
 
 enum
 {
@@ -26,8 +28,8 @@ enum
 
 typedef struct s_gameenv
 {
-	void	*mlx;
-	void	*win;
+	void	*mlx_ptr;
+	void	*win_ptr;
 	int		width;
 	int		height;
 

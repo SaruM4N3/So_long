@@ -6,7 +6,7 @@
 #    By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/14 19:44:37 by sarunomane        #+#    #+#              #
-#    Updated: 2025/04/14 00:52:53 by zsonie           ###   ########.fr        #
+#    Updated: 2025/04/14 18:20:08 by zsonie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,12 +50,12 @@ bonus:
 	mkdir -p $@
 
 $(DIR_OBJ)%.o: $(SRC_DIR)%.c
-	echo "Compiling $*.c"
-	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(GREEN)Compiling $*.c $(RESET)"
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
-	echo "Make libft"
+	@echo "$(GREEN)Make libft $(RESET)"
 	$(MAKE) -s -j -C ./libft
 
 $(MLX):
@@ -66,14 +66,14 @@ $(NAME): $(MLX) $(LIBFT) $(DIR_OBJ) $(OBJS) Makefile
 
 .PHONY: clean
 clean:
-	$(MAKE) -j clean --no-print-directory -C ./minilibx-linux
-	$(MAKE) -j clean --no-print-directory -C ./libft
-	rm -Rf $(DIR_OBJ)
+	@$(MAKE) -j clean --no-print-directory -C ./minilibx-linux
+	@$(MAKE) -j clean --no-print-directory -C ./libft
+	@rm -rf $(DIR_OBJ)
 
 .PHONY: fclean
 fclean: clean
 	$(MAKE) -j fclean --no-print-directory -C ./libft
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 .PHONY: re
 re:
@@ -81,3 +81,8 @@ re:
 	$(MAKE) --no-print-directory all
 
 .DEFAULT_GOAL = all
+# COLORS
+RED    = \033[31m
+GREEN  = \033[32m
+YELLOW = \033[33m
+RESET  = \033[0m

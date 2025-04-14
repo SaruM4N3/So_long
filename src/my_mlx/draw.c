@@ -6,11 +6,12 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:46:44 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/14 00:50:27 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/14 18:13:18 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/my_mlx.h"
+#include "../../headers/so_long.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -60,4 +61,24 @@ void	my_mlx_draw_square(t_data *data, t_coord *coord, int size, int color)
 		my_mlx_pixel_put(data, i, j, color);
 	while (--j > coord->pos_y)
 		my_mlx_pixel_put(data, i, j, color);
+}
+
+void	my_mlx_draw_tester(t_data data)
+{
+	t_coord coord;
+
+	coord.pos_x = 100;
+	coord.pos_y = 100;
+	coord.target_x = 300;
+	coord.target_y = 600;
+
+	my_mlx_draw_square(&data, &coord, 10, red);
+	my_mlx_draw_square(&data, &coord, 20, green);
+	my_mlx_draw_square(&data, &coord, 30, blue);
+	my_mlx_draw_square(&data, &coord, 40, cyan);
+	my_mlx_draw_square(&data, &coord, 50, yellow);
+	my_mlx_draw_square(&data, &coord, 60, orange);
+	my_mlx_draw_square(&data, &coord, 70, grey);
+	my_mlx_draw_square(&data, &coord, 80, white);
+	my_mlx_draw_line(&data, &coord, cyan);
 }

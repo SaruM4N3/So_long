@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:31:25 by saru              #+#    #+#             */
-/*   Updated: 2025/04/14 02:36:01 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/14 17:06:05 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,4 @@ char	**ft_strdup_2d(char **grid, int height)
 	}
 	copy[height] = NULL;
 	return (copy);
-}
-
-void free_2d_array(char **array, int height)
-{
-    int	i;
-
-    i = 0;
-    while (i < height)
-    {
-        free(array[i]);
-        i++;
-    }
-    free(array);
 }

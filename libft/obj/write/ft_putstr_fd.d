@@ -1,1 +1,0 @@
-obj/write/ft_putstr_fd.o: src/write/ft_putstr_fd.c
