@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:58:57 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/14 18:48:34 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/14 23:44:55 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ int	main(void)
 {
 	t_gameenv env;
 	t_data	data;
+	void	*grass;
+	int		grass_width;
+	int		grass_height;
 	
 	if (!init_env(&env))
 		return (1);
@@ -59,7 +62,9 @@ int	main(void)
 	mlx_put_image_to_window(env.mlx_ptr, env.win_ptr, data.img, 0, 0);
 	//test
 	my_mlx_draw_tester(data);
-	
+		//ca crash ici
+	grass = mlx_xpm_file_to_image(env.mlx_ptr,"../ressources/textures/grassTileset.xpm", &grass_width, &grass_height);
+	mlx_put_image_to_window(env.mlx_ptr, env.win_ptr, grass, grass_width, grass_height);
 	mlx_loop(env.mlx_ptr);
 	mlx_destroy_window(env.mlx_ptr, env.win_ptr);
 	mlx_destroy_image(env.mlx_ptr, data.img);
