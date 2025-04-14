@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:34:45 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/02/22 17:13:09 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:28:06 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,4 @@ void	map_load(t_map *map, char *map_path)
 		return;
 	map_check(fd, map);
 	close(fd);
-}
-
-void	map_draw()
-{
-	
 }

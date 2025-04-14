@@ -6,7 +6,7 @@
 #    By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/14 19:44:37 by sarunomane        #+#    #+#              #
-#    Updated: 2025/04/09 15:23:32 by zsonie           ###   ########.fr        #
+#    Updated: 2025/04/14 00:52:53 by zsonie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ CFLAGS = -Wall -Wextra -Werror -MMD -mavx2 $(ADDFLAGS) -I $(INC_DIR) -I libft/he
 LIBS = -Llibft -lft -Lminilibx-linux -lbsd -lmlx -lXext -lX11 -lm -lz
 SOLONG_SRCS =	main.c\
 				update.c\
-				error.c
+				error.c \
+				my_mlx/draw.c
 
 OBJS = ${patsubst %.c,$(DIR_OBJ)%.o, $(SOLONG_SRCS)}
 

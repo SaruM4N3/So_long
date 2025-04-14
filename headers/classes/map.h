@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:04:34 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/02/22 16:10:23 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:29:07 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 typedef struct s_map
 {
-	char	*grid;
+	char	**grid;
 	int		width;
 	int		height;
 	int		pstart;
