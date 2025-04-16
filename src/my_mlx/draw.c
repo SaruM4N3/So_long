@@ -6,14 +6,14 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:46:44 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/14 18:13:18 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/16 22:59:35 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/my_mlx.h"
 #include "../../headers/so_long.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -21,7 +21,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	my_mlx_draw_line(t_data *data, t_coord *coord, int color)
+void	my_mlx_draw_line(t_img *data, t_coord *coord, int color)
 {
     float	x;
     float	y;
@@ -46,7 +46,7 @@ void	my_mlx_draw_line(t_data *data, t_coord *coord, int color)
     }
 }
 
-void	my_mlx_draw_square(t_data *data, t_coord *coord, int size, int color)
+void	my_mlx_draw_square(t_img *data, t_coord *coord, int size, int color)
 {
 	int	i;
 	int	j;
@@ -63,7 +63,7 @@ void	my_mlx_draw_square(t_data *data, t_coord *coord, int size, int color)
 		my_mlx_pixel_put(data, i, j, color);
 }
 
-void	my_mlx_draw_tester(t_data data)
+void	my_mlx_draw_tester(t_img data)
 {
 	t_coord coord;
 

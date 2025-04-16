@@ -1,3 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   my_mlx.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 18:26:09 by zsonie            #+#    #+#             */
+/*   Updated: 2025/04/16 23:27:26 by zsonie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "so_long.h"
 
 typedef struct s_coord
 {
@@ -6,15 +20,6 @@ typedef struct s_coord
 	int		target_x;
 	int		target_y;
 }			t_coord;
-
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_data;
 
 enum colors 
 {
@@ -29,7 +34,8 @@ enum colors
 	white = 0xFFFFFFFF
 };
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	my_mlx_draw_line(t_data *data, t_coord *coord, int color);
-void	my_mlx_draw_square(t_data *data, t_coord *coord, int size, int color);
-void	my_mlx_draw_tester(t_data data);
+//Draw
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void	my_mlx_draw_line(t_img *data, t_coord *coord, int color);
+void	my_mlx_draw_square(t_img *data, t_coord *coord, int size, int color);
+void	my_mlx_draw_tester(t_img data);
