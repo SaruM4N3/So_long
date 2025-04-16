@@ -6,22 +6,21 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:26:09 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/16 23:27:26 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/17 01:29:46 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "so_long.h"
 
 typedef struct s_coord
 {
-	int		pos_x;
-	int		pos_y;
-	int		target_x;
-	int		target_y;
-}			t_coord;
+	int	pos_x;
+	int	pos_y;
+	int	target_x;
+	int	target_y;
+}		t_coord;
 
-enum colors 
+enum	colors
 {
 	red = 0x00FF0000,
 	green = 0x0000FF00,
@@ -34,7 +33,7 @@ enum colors
 	white = 0xFFFFFFFF
 };
 
-//Draw
+// Draw
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void	my_mlx_draw_line(t_img *data, t_coord *coord, int color);
 void	my_mlx_draw_square(t_img *data, t_coord *coord, int size, int color);

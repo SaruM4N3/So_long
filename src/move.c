@@ -6,12 +6,11 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:24:11 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/16 23:57:10 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/17 01:23:47 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/so_long.h"
-
 
 static int	move_count(void)
 {

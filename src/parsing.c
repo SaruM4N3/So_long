@@ -6,12 +6,12 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:31:25 by saru              #+#    #+#             */
-/*   Updated: 2025/04/14 17:06:05 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/17 01:24:03 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/classes/map.h"
-#include <stddef.h>
+#include "../headers/classes/map.h"
+#include "../headers/classes/so_long.h"
 
 static void	flood_fill(char **grid, int x, int y, int width, int height)
 {

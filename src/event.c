@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:04:56 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/16 23:41:58 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/17 01:32:01 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int	handle_input(int key, t_gameenv *env)
 }
 int	handle_no_event()
 {
+	__builtin_printf("%s","test");
 	return (0);		
 }

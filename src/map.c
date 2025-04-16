@@ -6,17 +6,13 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:34:45 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/14 02:28:06 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/17 01:25:07 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "headers/classes/map.h"
-#include "fcntl.h"
-#include "headers/error.h"
-#include "errno.h"
-#include <get_next_line.h>
-#include <libft.h>
+#include "../headers/error.h"
+#include "../headers/map.h"
+#include "../headers/so_long.h"
 
 static void	row_checker(t_map *map, int y, char *row)
 {
@@ -38,7 +34,6 @@ static void	row_checker(t_map *map, int y, char *row)
 			print_custom_error("Loading map", ERRMAPCHAR);
 	}
 	map->width = x;
-	
 }
 
 void	map_check(int fd, t_map *map)
@@ -52,7 +47,7 @@ void	map_check(int fd, t_map *map)
 	{
 		row = get_next_line(fd);
 		if (!row)
-			return;
+			return ;
 		row_checker(map, y, row);
 		if (!map->grid)
 			map->grid = row;
@@ -67,7 +62,7 @@ void	map_load(t_map *map, char *map_path)
 
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
-		return;
+		return ;
 	map_check(fd, map);
 	close(fd);
 }

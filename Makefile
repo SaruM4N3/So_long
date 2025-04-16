@@ -6,7 +6,7 @@
 #    By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/14 19:44:37 by sarunomane        #+#    #+#              #
-#    Updated: 2025/04/16 23:40:15 by zsonie           ###   ########.fr        #
+#    Updated: 2025/04/17 01:09:13 by zsonie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ LIBS = -Llibft -lft -Lminilibx-linux -lbsd -lmlx -lXext -lX11 -lm -lz
 SOLONG_SRCS =	main.c\
 				event.c\
 				move.c\
+				player.c\
 				error.c \
 				my_mlx/draw.c
 

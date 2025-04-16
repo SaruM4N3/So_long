@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saru <saru@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:06:42 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/07 17:29:33 by saru             ###   ########.fr       */
+/*   Updated: 2025/04/17 01:22:23 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
-#include "ft_printf.h"
+#include "../headers/error.h"
 #include <errno.h>
 #include <string.h>
 
