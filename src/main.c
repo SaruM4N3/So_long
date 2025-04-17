@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:58:57 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/17 01:20:48 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/18 00:16:53 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ int	main(void)
 	t_gameenv	env;
 
 	if (!init_env(&env))
+		return (1);
+	init_map();
+	if (!init_player())
 		return (1);
 	mlx_loop_hook(env.win_ptr, &handle_no_event, &env);
 	mlx_key_hook(env.win_ptr, &handle_input, &env);

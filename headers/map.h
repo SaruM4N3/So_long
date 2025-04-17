@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:04:34 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/17 01:29:43 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/18 00:22:07 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@
 
 typedef struct s_map
 {
-	char	**grid;
-	char	*path;
-	int		width;
-	int		height;
-}			t_map;
+	char		**grid;
+	char		*path;
+	int			width;
+	int			height;
+	t_2Dvector	player_pos;
+}				t_map;
 
-void		map_check(int fd, t_map *map);
-void		map_load(t_map *map);
+void			map_check(int fd, t_map *map);
+int				get_player_pos(t_map *map);
+void			map_load(t_map *map);
 
 #endif

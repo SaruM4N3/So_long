@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:34:45 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/17 01:25:07 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/18 00:29:18 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,29 @@ static void	row_checker(t_map *map, int y, char *row)
 			print_custom_error("Loading map", ERRMAPCHAR);
 	}
 	map->width = x;
+}
+
+void	get_player_pos(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (map.grid[j])
+	{
+		while (map.grid[j][i])
+		{
+			if (map.grid[j][i] != MAP_PLAYERSTART)
+			{
+				map->player_pos.x = i;
+				map->player_pos.y = j;
+			}
+			i++;
+		}
+		i = 0;
+		j++;
+	}
 }
 
 void	map_check(int fd, t_map *map)
