@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:34:45 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/18 00:29:18 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/18 14:51:06 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,75 +17,93 @@
 static void	row_checker(t_map *map, int y, char *row)
 {
 	int	x;
-	int	i;
+	size_t	i;
 
 	x = 0;
 	i = 0;
-	while (row[x] && row[x] != '\n')
+	while (row[x] && (row[x] != '\n'))
 	{
-		while (row[x] != MAP_POSSIBLECHAR[i])
-			i++;
-		if (i <= ft_strlen(MAP_POSSIBLECHAR))
+		while (MAP_POSSIBLECHAR[i])
 		{
+			if ((row[x] != MAP_POSSIBLECHAR[i]))
+				i++;
+		}
+		if (i < ft_strlen(MAP_POSSIBLECHAR))
+		{
+			map->grid[y][x] = row[x];
 			x++;
 			i = 0;
 		}
 		else
 			print_custom_error("Loading map", ERRMAPCHAR);
 	}
-	map->width = x;
+	//Perhaps just x, but i'm not sure since im waiting for '\n'
+	map->width = x - 1;
 }
 
-void	get_player_pos(t_map *map)
+static int	map_check(int fd, t_map *map)
+{
+	char	*row;
+	int		y;
+	static int rowlenght;
+
+	y = 0;
+	row = "";
+	while (row)
+	{
+		row = get_next_line(fd);
+		if (!row)
+			return (-1);
+		rowlenght = ft_strlen(row);
+		row_checker(map, y, row);
+		if (map->width != rowlenght-1)
+			return (print_custom_error("Loading map", ERRMAPISNOTRECT));
+		if (!map->grid[y])
+			map->grid[y] = row;
+		else
+			ft_printf("ya une couilles dans le potage");
+		y++;
+	}
+	map->height = y;
+	return (0);
+}
+
+bool	get_player_pos(t_map *map)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (map.grid[j])
+	while (map->grid[j])
 	{
-		while (map.grid[j][i])
+		while (map->grid[j][i])
 		{
-			if (map.grid[j][i] != MAP_PLAYERSTART)
+			if (map->grid[j][i] == MAP_PLAYERSTART)
 			{
 				map->player_pos.x = i;
 				map->player_pos.y = j;
+				return (true);
 			}
 			i++;
 		}
 		i = 0;
 		j++;
 	}
+	return (false);
 }
 
-void	map_check(int fd, t_map *map)
-{
-	char	*row;
-	int		y;
-
-	y = 0;
-	row = 1;
-	while (row)
-	{
-		row = get_next_line(fd);
-		if (!row)
-			return ;
-		row_checker(map, y, row);
-		if (!map->grid)
-			map->grid = row;
-		y++;
-	}
-	map->height = y;
-}
-
-void	map_load(t_map *map, char *map_path)
+int	init_map(char *path, t_map *map)
 {
 	int	fd;
 
-	fd = open(map_path, O_RDONLY);
+	//WIP: secure mappath 
+	map->path = path;
+
+	fd = open(map->path, O_RDONLY);
 	if (fd < 0)
-		return ;
+		return (-1);
 	map_check(fd, map);
 	close(fd);
+	return (0);
 }

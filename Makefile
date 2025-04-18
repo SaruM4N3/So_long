@@ -6,7 +6,7 @@
 #    By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/14 19:44:37 by sarunomane        #+#    #+#              #
-#    Updated: 2025/04/17 01:09:13 by zsonie           ###   ########.fr        #
+#    Updated: 2025/04/18 14:31:25 by zsonie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SOLONG_SRCS =	main.c\
 				event.c\
 				move.c\
 				player.c\
+				map.c\
 				error.c \
 				my_mlx/draw.c
 

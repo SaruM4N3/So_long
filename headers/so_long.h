@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 20:01:48 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/18 00:21:32 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/18 14:55:03 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 // Includes
 # include "../libft/headers/libft.h"
+# include "../libft/headers/ft_printf.h"
 # include "../minilibx-linux/mlx.h"
-# include "headers/map.h"
+# include <fcntl.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <stdbool.h>
@@ -33,6 +34,15 @@ typedef struct s_player
 {
 	t_2Dvector	pos;
 }				t_player;
+
+typedef struct s_map
+{
+	char		**grid;
+	char		*path;
+	int			width;
+	int			height;
+	t_2Dvector	player_pos;
+}				t_map;
 
 typedef struct s_img
 {
@@ -62,7 +72,7 @@ int				handle_input(int key, t_gameenv *env);
 int				handle_no_event(void);
 
 // Player
-t_player		init_player(int x, int y);
+t_player		init_player(int x, int y, t_gameenv *env);
 void			set_player_pos(t_player *player, int x, int y);
 
 // Move

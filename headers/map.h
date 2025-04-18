@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:04:34 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/18 00:22:07 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/18 14:49:47 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,17 @@
 # define MAP_H
 
 # define MAP_POSSIBLECHAR "01PEC"
-# define MAP_WALKABLE "0"
-# define MAP_WALL "1"
-# define MAP_PLAYERSTART "P"
-# define MAP_EXIT "E"
-# define MAP_COIN "C"
+# define MAP_WALKABLE '0'
+# define MAP_WALL '1'
+# define MAP_PLAYERSTART 'P'
+# define MAP_EXIT 'E'
+# define MAP_COIN 'C'
 
-typedef struct s_map
-{
-	char		**grid;
-	char		*path;
-	int			width;
-	int			height;
-	t_2Dvector	player_pos;
-}				t_map;
+# define TEST_MAP_PATH "../ressources/maps/test.ber"
 
-void			map_check(int fd, t_map *map);
-int				get_player_pos(t_map *map);
-void			map_load(t_map *map);
+# include "so_long.h"
+
+bool	get_player_pos(t_map *map);
+int		init_map(char *path, t_map *map);
 
 #endif
