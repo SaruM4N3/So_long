@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:06:42 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/17 01:22:23 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/18 16:57:01 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static char	*str_custom_errors(char *category, int err)
 {
-	if (ft_strncmp(category, "Loading Map", 50) == 0)
+	if (ft_strncmp(category, "Loading map", 12) == 0)
 	{
 		if (err == ERRNOMAP)
 			return ("Map doesnt exist");
@@ -33,13 +33,14 @@ static char	*str_custom_errors(char *category, int err)
 		if (err == ERRMAPPATH)
 			return ("No path availabe");
 	}
-	return ("Unknown error");
+	return ("Unknown error\n");
 }
 
 int	print_custom_error(char *category, int err)
 {
+	// ft_printf("inside print custom error, category : %s\terr: %d\n",category,err);
 	if (!err || !category)
 		return (-1);
-	ft_printf("Custom Error: %s", str_custom_errors(category, err));
+	ft_printf("Custom Error: %s\n", str_custom_errors(category, err));
 	return (0);
 }

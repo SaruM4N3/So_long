@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarunomane <sarunomane@student.42.fr>      +#+  +:+       +#+        */
+/*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 18:32:53 by zsonie            #+#    #+#             */
-/*   Updated: 2025/02/21 15:28:18 by sarunomane       ###   ########.fr       */
+/*   Updated: 2025/04/18 17:02:50 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -368,7 +368,7 @@ char			**ft_split(char const *s, char c);
        character c in the string s.
 **
 ** @param s: the destination string.
-** @param c: the char to fill.
+** @param c: the char to find.
 ** @return a pointer to the first occurrence of the
        character c in the string s.
 */
