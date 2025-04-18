@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:58:57 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/18 14:54:36 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/18 23:03:06 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,13 @@ bool	init_env(t_gameenv *env)
 int	main(void)
 {
 	t_gameenv	env;
-	t_map map;
-	t_player player;
 
 	if (!init_env(&env))
 		return (1);
-	if (!init_map(TEST_MAP_PATH, &map))
+	if (!init_map(TEST_MAP_PATH, &env.map))
 		return (1);
-	player = init_player(map.player_pos.x,map.player_pos.y, &env);
-	ft_printf("player_pos_x: %d\tplayer_pos_y: %d\n", player.pos.x,player.pos.y);
-	(void) player;
+	env.player = init_player(env.map.player_pos.x,env.map.player_pos.y, &env);
+	ft_printf("player_pos_x: %d\tplayer_pos_y: %d\n", env.player.pos.x, env.player.pos.y);
 	mlx_loop_hook(env.win_ptr, &handle_no_event, &env);
 	mlx_key_hook(env.win_ptr, &handle_input, &env);
 	mlx_hook(env.win_ptr, DestroyNotify, StructureNotifyMask,

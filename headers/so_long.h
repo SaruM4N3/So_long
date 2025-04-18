@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 20:01:48 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/18 15:45:54 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/18 23:06:55 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@
 
 // Struct
 
-typedef struct s_2Dvector
+typedef struct s_2dvector
 {
 	int			x;
 	int			y;
-}				t_2Dvector;
+}				t_2dvector;
 
 typedef struct s_player
 {
-	t_2Dvector	pos;
+	t_2dvector	pos;
 }				t_player;
 
 typedef struct s_map
@@ -41,7 +41,7 @@ typedef struct s_map
 	char		*path;
 	int			width;
 	int			height;
-	t_2Dvector	player_pos;
+	t_2dvector	player_pos;
 }				t_map;
 
 typedef struct s_img
@@ -76,9 +76,9 @@ t_player		init_player(int x, int y, t_gameenv *env);
 void			set_player_pos(t_player *player, int x, int y);
 
 // Move
-int				move_up(t_player player, t_map map);
-int				move_left(t_player player, t_map map);
-int				move_down(t_player player, t_map map);
-int				move_right(t_player player, t_map map);
+int				move_up(t_player *player, t_map map);
+int				move_left(t_player *player, t_map map);
+int				move_down(t_player *player, t_map map);
+int				move_right(t_player *player, t_map map);
 
 #endif
