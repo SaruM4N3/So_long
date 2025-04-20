@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 20:01:48 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/18 23:06:55 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/20 13:57:34 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,16 @@ typedef struct s_img
 	char		*addr;
 	int			width;
 	int			height;
+	char		*ground_path;
+	char		*wall_path;
+	char		*coin_path;
+	char		*player_path;
+	char		*exit_path;
+	void		*img_ground;
+	void		*img_wall;
+	void		*img_coin;
+	void		*img_player;
+	void		*img_exit;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
