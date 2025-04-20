@@ -6,7 +6,7 @@
 #    By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/14 19:44:37 by sarunomane        #+#    #+#              #
-#    Updated: 2025/04/20 13:53:25 by zsonie           ###   ########.fr        #
+#    Updated: 2025/04/21 01:07:28 by zsonie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,7 @@ SOLONG_SRCS =	main.c\
 				player.c\
 				render.c\
 				map.c\
-				error.c \
-				my_mlx/draw.c
+				error.c
 
 OBJS = ${patsubst %.c,$(DIR_OBJ)%.o, $(SOLONG_SRCS)}
 
