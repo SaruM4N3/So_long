@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 20:01:48 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/17 01:29:38 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/22 23:50:50 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,17 @@
  */
 int		print_custom_error(char *category, int error);
 
+/**
+ * @brief Handles the case where the specified map does not exist.
+ *
+ * This function is called when the provided map pointer is invalid or
+ * the map cannot be found. It is responsible for managing the error
+ * condition appropriately.
+ *
+ * @param map A pointer to the map structure that is being checked.
+ *            If the map does not exist, this function will handle
+ *            the error.
+ */
 void	map_doesnt_exist(t_map *map);
 
 #endif

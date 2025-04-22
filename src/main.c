@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:58:57 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/22 20:35:31 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/23 00:42:20 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	close_env(t_gameenv *env)
 	free(env->mlx_ptr);
 }
 
-bool	init_env(t_gameenv *env)
+static bool	init_env(t_gameenv *env)
 {
 	env->mlx_ptr = mlx_init();
 	if (!env->mlx_ptr)
@@ -50,15 +50,24 @@ bool	init_env(t_gameenv *env)
 	return (true);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_gameenv	env;
-
+	if (ac != 2)
+	{
+		ft_printf("Error\n, please proceed as follow\n\n\
+<< ./so_long 'path_to_map.ber' >>\n\n\
+Or test with\n\n<< ./so_long test >>\n");
+		return (0);
+	}
+	if (ft_strncmp(av[1],"test", 8) == 0)
+		env.map.path = TEST_MAP_PATH;
+	else
+		env.map.path = av[1];
 	if (!init_env(&env))
 		return (1);
-	if (!init_map(TEST_MAP_PATH, &env))
+	if (!init_map(env.map.path, &env))
 		return (1);
-	ft_printf("mapgrid: %s\n", env.map.grid[0]);
 	env.player = init_player(env.map.player_pos.x, env.map.player_pos.y, &env);
 	init_img_from_xpm(&env);
 	mlx_loop_hook(env.mlx_ptr, &handle_no_event, &env);
