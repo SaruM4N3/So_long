@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:31:25 by saru              #+#    #+#             */
-/*   Updated: 2025/04/17 01:24:03 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/22 18:15:48 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,29 @@ static void	flood_fill(char **grid, int x, int y, int width, int height)
 	if (x < 0 || y < 0 || x >= width || y >= height || grid[y][x] == '1'
 		|| grid[y][x] == 'F')
 		return ;
-	// Mark the current position as visited
 	grid[y][x] = 'F';
-	// Recursively flood-fill in all four directions
-	flood_fill(grid, x + 1, y, width, height); // Right
-	flood_fill(grid, x - 1, y, width, height); // Left
-	flood_fill(grid, x, y + 1, width, height); // Down
-	flood_fill(grid, x, y - 1, width, height); // Up
+	flood_fill(grid, x + 1, y, width, height);
+	flood_fill(grid, x - 1, y, width, height);
+	flood_fill(grid, x, y + 1, width, height);
+	flood_fill(grid, x, y - 1, width, height);
+}
+
+char	**ft_strdup_2d(char **grid, int height)
+{
+	char	**copy;
+	int		i;
+
+	copy = malloc(sizeof(char *) * (height + 1));
+	if (!copy)
+		return (NULL);
+	i = 0;
+	while (i < height)
+	{
+		copy[i] = ft_strdup(grid[i]);
+		i++;
+	}
+	copy[height] = NULL;
+	return (copy);
 }
 
 static int	validate_map(t_map *map)
@@ -35,7 +51,6 @@ static int	validate_map(t_map *map)
 
 	int x, y;
 	coins = 0, exit_found = 0;
-	// Create a copy of the map grid
 	grid_copy = ft_strdup_2d(map->grid, map->height);
 	// Find the player's position and start flood-fill
 	y = 0;
@@ -75,22 +90,4 @@ void	check_for_coins_and_exit(t_map *map, int x, int y, char **grid_copy)
 		}
 		y++;
 	}
-}
-
-char	**ft_strdup_2d(char **grid, int height)
-{
-	char	**copy;
-	int		i;
-
-	copy = malloc(sizeof(char *) * (height + 1));
-	if (!copy)
-		return (NULL);
-	i = 0;
-	while (i < height)
-	{
-		copy[i] = ft_strdup(grid[i]);
-		i++;
-	}
-	copy[height] = NULL;
-	return (copy);
 }

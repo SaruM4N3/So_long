@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:58:57 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/21 01:23:54 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/22 20:35:31 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,12 @@ int	main(void)
 
 	if (!init_env(&env))
 		return (1);
-	if (!init_map(TEST_MAP_PATH, &env.map))
+	if (!init_map(TEST_MAP_PATH, &env))
 		return (1);
+	ft_printf("mapgrid: %s\n", env.map.grid[0]);
 	env.player = init_player(env.map.player_pos.x, env.map.player_pos.y, &env);
-	ft_printf("player_pos_x: %d\tplayer_pos_y: %d\n", env.player.pos.x,
-			env.player.pos.y);
-	if (!init_img_from_xpm(&env))
-		clean_render(&env);
-	ft_printf("not seg");
-
-	mlx_loop_hook(env.win_ptr, &render_img, &env);
-	ft_printf("seg");
-	mlx_loop_hook(env.win_ptr, &handle_no_event, &env);
+	init_img_from_xpm(&env);
+	mlx_loop_hook(env.mlx_ptr, &handle_no_event, &env);
 	mlx_key_hook(env.win_ptr, &handle_input, &env);
 	mlx_hook(env.win_ptr, DestroyNotify, StructureNotifyMask, &mlx_loop_end,
 			env.mlx_ptr);

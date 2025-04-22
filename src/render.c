@@ -6,13 +6,13 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:49:39 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/21 01:22:40 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/22 20:52:42 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/so_long.h"
 
-static void set_path_and_size(t_gameenv *env)
+static void	set_path_and_size(t_gameenv *env)
 {
 	env->img.height = 32;
 	env->img.width = 32;
@@ -20,9 +20,9 @@ static void set_path_and_size(t_gameenv *env)
 	env->img.wall_path = "./ressources/textures/wall32.xpm";
 	env->img.coin_path = "./ressources/textures/cat32.xpm";
 	env->img.player_path = "./ressources/textures/player32.xpm";
+	env->img.player_exit_path = "./ressources/textures/player_exit.xpm";
 	env->img.exit_path = "./ressources/textures/exit32.xpm";
 }
-
 
 int	init_img_from_xpm(t_gameenv *env)
 {
@@ -31,28 +31,25 @@ int	init_img_from_xpm(t_gameenv *env)
 			&(env->img.width), &(env->img.height));
 	if (!env->img.img_wall)
 		return (1);
-	env->img.img_ground = mlx_xpm_file_to_image(env->mlx_ptr, env->img.ground_path,
-			&(env->img.width), &(env->img.height));
+	env->img.img_ground = mlx_xpm_file_to_image(env->mlx_ptr,
+			env->img.ground_path, &(env->img.width), &(env->img.height));
 	if (!env->img.img_ground)
 		return (1);
 	env->img.img_exit = mlx_xpm_file_to_image(env->mlx_ptr, env->img.exit_path,
 			&(env->img.width), &(env->img.height));
 	if (!env->img.img_exit)
 		return (1);
-	env->img.img_collect = mlx_xpm_file_to_image(env->mlx_ptr, env->img.coin_path,
-			&(env->img.width), &(env->img.height));
+	env->img.img_collect = mlx_xpm_file_to_image(env->mlx_ptr,
+			env->img.coin_path, &(env->img.width), &(env->img.height));
 	if (!env->img.img_collect)
 		return (1);
-	env->img.img_player = mlx_xpm_file_to_image(env->mlx_ptr, env->img.player_path,
-			&(env->img.width), &(env->img.height));
-	if (!env->img.img_player)
-		return (1);
+	init_player_img_from_xpm(env);
 	return (0);
 }
 
-void	clean_render(t_gameenv *env)
+int	clean_render(t_gameenv *env)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	if (env->map.grid != NULL)
@@ -70,37 +67,27 @@ void	clean_render(t_gameenv *env)
 		mlx_destroy_image(env->mlx_ptr, env->img.img_exit);
 		mlx_destroy_window(env->mlx_ptr, env->win_ptr);
 	}
-	if (env->mlx_ptr != NULL)
-	{
-		mlx_destroy_display(env->mlx_ptr);
-		free(env->mlx_ptr);
-	}
+	mlx_destroy_display(env->mlx_ptr);
+	free(env->mlx_ptr);
+	exit(0);
 }
 
-int		render_img(t_gameenv env)
+int	render_img(t_gameenv *env)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
+	x = 0;
 	y = 0;
-	while (env.map.grid[y])
+	while (env->map.grid[y])
 	{
-		ft_printf("%s", env.map.grid[y]);
-		x = 0;
-		while (env.map.grid[y][x])
+		while (env->map.grid[y][x])
 		{
-			if (env.map.grid[y][x] == '1')
-				mlx_put_image_to_window(env.mlx_ptr, env.win_ptr, env.img.img_wall, x * env.img.width, y * env.img.height);
-			else if (env.map.grid[y][x] == '0')
-				mlx_put_image_to_window(env.mlx_ptr, env.win_ptr, env.img.img_ground, x * env.img.width, y * env.img.height);
-			else if (env.map.grid[y][x] == 'C')
-				mlx_put_image_to_window(env.mlx_ptr, env.win_ptr, env.img.img_collect, x * env.img.width, y * env.img.height);
-			else if (env.map.grid[y][x] == 'P')
-				mlx_put_image_to_window(env.mlx_ptr, env.win_ptr, env.img.img_player, x * env.img.width, y * env.img.height);
-			else if (env.map.grid[y][x] == 'E')
-				mlx_put_image_to_window(env.mlx_ptr, env.win_ptr, env.img.img_exit, x * env.img.width, y * env.img.height);
+			render_other_img(env, x, y);
+			render_player_img(env, x, y);
 			x++;
 		}
+		x = 0;
 		y++;
 	}
 	return (0);

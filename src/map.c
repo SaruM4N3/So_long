@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:34:45 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/19 00:26:58 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/22 20:32:27 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,10 @@ static int	map_check(int fd, t_map *map)
 		y++;
 	}
 	map->grid[y] = NULL;
-	ft_printf("map->height = %d\n", map->height);
 	return (0);
 }
 
-bool	get_player_pos(t_map *map)
+bool	get_element_pos_and_coins_nb(t_map *map)
 {
 	int	i;
 	int	j;
@@ -90,6 +89,13 @@ bool	get_player_pos(t_map *map)
 	{
 		while (map->grid[j][i])
 		{
+			if (map->grid[j][i] == 'C')
+				map->coins_nb++;
+			if (map->grid[j][i] == MAP_EXIT)
+			{
+				map->exit_pos.x = i;
+				map->exit_pos.y = j;
+			}
 			if (map->grid[j][i] == MAP_PLAYERSTART)
 			{
 				map->player_pos.x = i;
@@ -116,20 +122,19 @@ static int	reset_gnl_and_get_map_height(t_map *map)
 	return (0);
 }
 
-int	init_map(char *path, t_map *map)
+int	init_map(char *path, t_gameenv *env)
 {
 	int	fd;
 
 	// WIP: secure mappath
-	map->path = path;
-	// ft_printf("mappath = %s\n", map->path);
-	if (reset_gnl_and_get_map_height(map))
+	env->map.path = path;
+	if (reset_gnl_and_get_map_height(&env->map))
 		return (0);
-	fd = open(map->path, O_RDONLY);
+	fd = open(env->map.path, O_RDONLY);
 	if (fd < 0)
 		return (0);
-	map_check(fd, map);
+	map_check(fd, &env->map);
 	close(fd);
-	get_player_pos(map);
+	get_element_pos_and_coins_nb(&env->map);
 	return (1);
 }

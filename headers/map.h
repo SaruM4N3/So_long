@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:04:34 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/18 15:52:13 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/22 20:31:40 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # include "so_long.h"
 
-bool	get_player_pos(t_map *map);
-int		init_map(char *path, t_map *map);
+bool	get_element_pos_and_coins_nb(t_map *map);
+int		init_map(char *path, t_gameenv *env);
 
 #endif

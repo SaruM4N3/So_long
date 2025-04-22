@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 20:01:48 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/21 01:18:07 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/22 20:50:36 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_2dvector
 typedef struct s_player
 {
 	t_2dvector	pos;
+	int			coins;
 }				t_player;
 
 typedef struct s_map
@@ -41,7 +42,9 @@ typedef struct s_map
 	char		*path;
 	int			width;
 	int			height;
+	int			coins_nb;
 	t_2dvector	player_pos;
+	t_2dvector	exit_pos;
 }				t_map;
 
 typedef struct s_img
@@ -51,12 +54,14 @@ typedef struct s_img
 	void		*img_wall;
 	void		*img_collect;
 	void		*img_player;
+	void		*img_player_exit;
 	void		*img_exit;
 	char		*addr;
 	char		*ground_path;
 	char		*wall_path;
 	char		*coin_path;
 	char		*player_path;
+	char		*player_exit_path;
 	char		*exit_path;
 	int			line_length;
 	int			bits_per_pixel;
@@ -81,7 +86,7 @@ void			close_env(t_gameenv *env);
 
 // Event
 int				handle_input(int key, t_gameenv *env);
-int				handle_no_event(void);
+int				handle_no_event(t_gameenv *env);
 
 // Player
 t_player		init_player(int x, int y, t_gameenv *env);
@@ -93,9 +98,13 @@ int				move_left(t_player *player, t_map map);
 int				move_down(t_player *player, t_map map);
 int				move_right(t_player *player, t_map map);
 
-// Render
+// Render & RenderUtils
 int				init_img_from_xpm(t_gameenv *env);
-void			clean_render(t_gameenv *env);
-int				render_img(t_gameenv env);
+int				init_player_img_from_xpm(t_gameenv *env);
+int				clean_render(t_gameenv *env);
+int				render_img(t_gameenv *env);
+void			render_player_img(t_gameenv *env, int x, int y);
+void			render_other_img(t_gameenv *env, int x, int y);
+
 
 #endif
