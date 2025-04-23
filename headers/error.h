@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 20:01:48 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/22 23:50:50 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/23 12:04:47 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ int		print_custom_error(char *category, int error);
  *            If the map does not exist, this function will handle
  *            the error.
  */
-void	map_doesnt_exist(t_map *map);
+int		map_parsing_check(t_gameenv *env);
 
 #endif

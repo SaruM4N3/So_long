@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:04:56 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/22 20:43:17 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/23 12:14:35 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@ bool check_for_remaining_coins(t_gameenv *env)
 
 int	handle_no_event(t_gameenv *env)
 {
+
+	render_img(env);
 	if (check_for_remaining_coins(env))
 	{
 		if(env->player.pos.x == env->map.exit_pos.x && env->player.pos.y == env->map.exit_pos.y)
 			mlx_loop_end(env->mlx_ptr);
 	}
-	render_img(env);
 	return (0);		
 }

@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:34:45 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/22 20:32:27 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/23 12:11:41 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int	init_map(char *path, t_gameenv *env)
 
 	// WIP: secure mappath
 	env->map.path = path;
+
 	if (reset_gnl_and_get_map_height(&env->map))
 		return (0);
 	fd = open(env->map.path, O_RDONLY);
@@ -135,6 +136,8 @@ int	init_map(char *path, t_gameenv *env)
 		return (0);
 	map_check(fd, &env->map);
 	close(fd);
+	if(!map_parsing_check(env))
+	return (0);
 	get_element_pos_and_coins_nb(&env->map);
 	return (1);
 }
