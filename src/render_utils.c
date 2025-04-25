@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:49:39 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/22 20:51:47 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 21:11:40 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	init_player_img_from_xpm(t_gameenv *env)
 	return (0);
 }
 
-void	render_player_img(t_gameenv *env, int x, int y)
+void	render_player_img(t_gameenv *env, int y, int x)
 {
 	if (env->map.grid[y][x] == 'P')
 		mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img.img_player,
@@ -42,7 +42,7 @@ void	render_player_img(t_gameenv *env, int x, int y)
 				* env->img.height);
 }
 
-void	render_other_img(t_gameenv *env, int x, int y)
+void	render_other_img(t_gameenv *env, int y, int x)
 {
 	if (env->map.grid[y][x] == '1')
 		mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img.img_wall, x

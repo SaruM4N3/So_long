@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:49:39 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/25 17:13:00 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 21:13:56 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,26 +74,24 @@ int	clean_render(t_gameenv *env)
 
 int	render_img(t_gameenv *env)
 {
-	int	x;
 	int	y;
+	int	x;
 
-	x = 0;
-	y = 0;
+	y = -1;
+	x = -1;
 	if (!env->mlx_ptr || !env->win_ptr)
     {
         ft_printf("Error: Invalid MLX or window pointer\n");
         return (1);
     }
-	while (env->map.grid[y])
+	while (env->map.grid[++y])
 	{
-		while (env->map.grid[y][x])
+		x = -1;
+		while (env->map.grid[y][++x])
 		{
-			render_other_img(env, x, y);
-			render_player_img(env, x, y);
-			x++;
+			render_other_img(env, y, x);
+			render_player_img(env, y, x);
 		}
-		x = 0;
-		y++;
 	}
 	return (0);
 }

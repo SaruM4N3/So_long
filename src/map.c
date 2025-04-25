@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:34:45 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/25 19:53:55 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 21:18:35 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,26 +61,27 @@ void	set_element_pos_and_coins_nb(t_gameenv *env)
 	int	x;
 
 	y = -1;
-	x = -1;
 	env->map.coins_nb = 0;
-	while (env->map.grid[++x])
+	while (env->map.grid[++y])
 	{
-		while (env->map.grid[x][++y])
+		x = -1;
+		while (env->map.grid[y][++x])
 		{
-			if (env->map.grid[x][y] == 'C')
+			if (env->map.grid[y][x] == 'C')
 				env->map.coins_nb++;
-			if (env->map.grid[x][y] == MAP_EXIT)
+			if (env->map.grid[y][x] == MAP_EXIT)
 			{
-				env->map.exit_pos.x = y;
-				env->map.exit_pos.y = x;
+				env->map.exit_pos.x = x;
+				env->map.exit_pos.y = y;
 			}
-			if (env->map.grid[x][y] == MAP_PLAYERSTART)
+			if (env->map.grid[y][x] == MAP_PLAYERSTART)
 			{
-				env->map.player_pos.x = y;
-				env->map.player_pos.y = x;
+				env->player.pos.x = x;
+				env->player.pos.y = y;				
+				env->map.player_pos.x = x;
+				env->map.player_pos.y = y;
 			}
 		}
-		y = 0;
 	}
 }
 
