@@ -6,11 +6,12 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:58:57 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/23 00:42:20 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 15:47:58 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/map.h"
+#include "../headers/error.h"
 #include "../headers/my_mlx.h"
 #include "../headers/so_long.h"
 
@@ -27,8 +28,8 @@ static bool	init_env(t_gameenv *env)
 	env->mlx_ptr = mlx_init();
 	if (!env->mlx_ptr)
 		return (false);
-	env->width = 1920;
-	env->height = 1080;
+	env->width = 1600;
+	env->height = 900;
 	env->win_ptr = mlx_new_window(env->mlx_ptr, env->width, env->height,
 			"So_long");
 	if (!env->win_ptr)
@@ -55,18 +56,19 @@ int	main(int ac, char **av)
 	t_gameenv	env;
 	if (ac != 2)
 	{
-		ft_printf("Error\n, please proceed as follow\n\n\
-<< ./so_long 'path_to_map.ber' >>\n\n\
-Or test with\n\n<< ./so_long test >>\n");
-		return (0);
+		print_error_and_return(ERRNOMAP);
+		return (1);
 	}
-	if (ft_strncmp(av[1],"test", 8) == 0)
-		env.map.path = TEST_MAP_PATH;
+	if (!ft_strnstr(av[1], ".ber", ft_strlen(av[1])))
+		return (print_error_and_return(ERRMAPPATH));
 	else
 		env.map.path = av[1];
 	if (!init_env(&env))
+	{
+		close_env(&env);
 		return (1);
-	if (!init_map(env.map.path, &env))
+	}
+	if (!init_map(&env))
 		return (1);
 	env.player = init_player(env.map.player_pos.x, env.map.player_pos.y, &env);
 	init_img_from_xpm(&env);
@@ -76,4 +78,5 @@ Or test with\n\n<< ./so_long test >>\n");
 			env.mlx_ptr);
 	mlx_loop(env.mlx_ptr);
 	close_env(&env);
+	return 0;
 }

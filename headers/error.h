@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 20:01:48 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/23 12:04:47 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 14:32:15 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,6 @@
 # define ERRTEXNOFS TEXTERROR + 2
 
 // Functions
-/**
- * @brief print a custom error message to figure out what's happening
-
-	* @param category: the category of the error ("Loading map" or "Loading texture")
- * @param error: the error code
- * @return: nothing
- */
-int		print_custom_error(char *category, int error);
 
 /**
  * @brief Handles the case where the specified map does not exist.
@@ -56,6 +48,23 @@ int		print_custom_error(char *category, int error);
  *            If the map does not exist, this function will handle
  *            the error.
  */
-int		map_parsing_check(t_gameenv *env);
+int	map_parsing_check(t_gameenv *env);
+
+/**
+ * @brief print a custom error message to figure out what's happening
+
+	* @param category: the category of the error ("Loading map" or "Loading texture")
+ * @param error: the error code
+ * @return: 0
+ */
+int	print_custom_error(char *category, int error);
+
+/**
+ * @brief Prints an error message corresponding to the given error code and returns 0.
+ *
+ * @param err The error code to be printed and returned.
+ * @return 0.
+ */
+int	print_error_and_return(int err);
 
 #endif

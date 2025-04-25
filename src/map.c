@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:34:45 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/23 12:11:41 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 15:44:23 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,63 +14,34 @@
 #include "../headers/map.h"
 #include "../headers/so_long.h"
 
-static void	row_checker(t_map *map, int y, char *row, int firstrowlenght)
+static void	row_checker(t_map *map, int y, char *row)
 {
 	int		x;
-	size_t	i;
 
 	x = 0;
-	i = 0;
 	map->grid[y] = malloc(sizeof(char) * (map->width + 1));
 	while (row[x] && (row[x] != '\n'))
 	{
-		while (MAP_POSSIBLECHAR[i])
-		{
-			if ((row[x] != MAP_POSSIBLECHAR[i]))
-				i++;
-			else
-				break ;
-		}
-		if (i < ft_strlen(MAP_POSSIBLECHAR))
-		{
-			map->grid[y][x] = row[x];
-			x++;
-			i = 0;
-		}
-		else
-		{
-			print_custom_error("Loading map", ERRMAPCHAR);
-			return ;
-		}
+		map->grid[y][x] = row[x];
+		x++;
 	}
 	map->grid[y][x] = '\0';
 	map->width = x;
-	if (map->width != firstrowlenght)
-		print_custom_error("Loading map", ERRMAPISNOTRECT);
 }
 
 static int	map_check(int fd, t_map *map)
 {
 	char	*row;
 	int		y;
-	int		firstrowlenght;
 
 	y = 0;
-	firstrowlenght = 0;
-	row = "";
 	map->grid = malloc(sizeof(char *) * (map->height + 1));
 	while (y < map->height)
 	{
 		row = get_next_line(fd);
 		if (!row)
 			return (-1);
-		if (firstrowlenght == 0)
-			firstrowlenght = ft_strlen(row) - 1;
-		if (!ft_strchr(row, '\n'))
-			map->width = ft_strlen(row);
-		else
-			map->width = ft_strlen(row) - 1;
-		row_checker(map, y, row, firstrowlenght);
+		row_checker(map, y, row);
 		map->grid[y] = row;
 		y++;
 	}
@@ -78,38 +49,34 @@ static int	map_check(int fd, t_map *map)
 	return (0);
 }
 
-bool	get_element_pos_and_coins_nb(t_map *map)
+void	set_element_pos_and_coins_nb(t_map *map)
 {
-	int	i;
-	int	j;
+	int	y;
+	int	x;
 
-	i = 0;
-	j = 0;
-	while (map->grid[j])
+	y = -1;
+	x = -1;
+	while (map->grid[++x])
 	{
-		while (map->grid[j][i])
+		while (map->grid[x][++y])
 		{
-			if (map->grid[j][i] == 'C')
+			if (map->grid[x][y] == 'C')
 				map->coins_nb++;
-			if (map->grid[j][i] == MAP_EXIT)
+			if (map->grid[x][y] == MAP_EXIT)
 			{
-				map->exit_pos.x = i;
-				map->exit_pos.y = j;
+				map->exit_pos.x = y;
+				map->exit_pos.y = x;
 			}
-			if (map->grid[j][i] == MAP_PLAYERSTART)
+			if (map->grid[x][y] == MAP_PLAYERSTART)
 			{
-				map->player_pos.x = i;
-				map->player_pos.y = j;
-				return (true);
+				map->player_pos.x = y;
+				map->player_pos.y = x;
 			}
-			i++;
 		}
-		i = 0;
-		j++;
+		y = 0;
 	}
-	return (false);
 }
-static int	reset_gnl_and_get_map_height(t_map *map)
+static int	reset_gnl_and_set_map_height(t_map *map)
 {
 	int	fd;
 
@@ -122,14 +89,11 @@ static int	reset_gnl_and_get_map_height(t_map *map)
 	return (0);
 }
 
-int	init_map(char *path, t_gameenv *env)
+int	init_map(t_gameenv *env)
 {
 	int	fd;
 
-	// WIP: secure mappath
-	env->map.path = path;
-
-	if (reset_gnl_and_get_map_height(&env->map))
+	if (reset_gnl_and_set_map_height(&env->map))
 		return (0);
 	fd = open(env->map.path, O_RDONLY);
 	if (fd < 0)
@@ -137,7 +101,7 @@ int	init_map(char *path, t_gameenv *env)
 	map_check(fd, &env->map);
 	close(fd);
 	if(!map_parsing_check(env))
-	return (0);
-	get_element_pos_and_coins_nb(&env->map);
+		return (0);
+	set_element_pos_and_coins_nb(&env->map);
 	return (1);
 }
