@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:58:57 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/25 15:47:58 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 17:32:44 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 
 void	close_env(t_gameenv *env)
 {
-	mlx_destroy_image(env->mlx_ptr, env->img.img);
-	mlx_destroy_window(env->mlx_ptr, env->win_ptr);
+	if(env->img.img)
+		mlx_destroy_image(env->mlx_ptr, env->img.img);
+	if(env->win_ptr)
+		mlx_destroy_window(env->mlx_ptr, env->win_ptr);
 	mlx_destroy_display(env->mlx_ptr);
 	free(env->mlx_ptr);
 }
@@ -64,10 +66,7 @@ int	main(int ac, char **av)
 	else
 		env.map.path = av[1];
 	if (!init_env(&env))
-	{
-		close_env(&env);
 		return (1);
-	}
 	if (!init_map(&env))
 		return (1);
 	env.player = init_player(env.map.player_pos.x, env.map.player_pos.y, &env);

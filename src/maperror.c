@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 09:04:37 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/25 15:01:16 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 17:36:35 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	map_parsing_check(t_gameenv *env)
 		return (print_error_and_return(ERRMAPISNOTRECT));
 	else if (check_for_wall(env) == ERRMAPWALL)
 		return (print_error_and_return(ERRMAPWALL));
-	if (check_for_player_and_exit(env) == ERRMAPEXIT)
+	else if (check_for_player_and_exit(env) == ERRMAPEXIT)
 		return (print_error_and_return(ERRMAPEXIT));
 	else if (check_for_player_and_exit(env) == ERRMAPPLAYER)
 		return (print_error_and_return(ERRMAPPLAYER));

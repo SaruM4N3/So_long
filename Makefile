@@ -6,7 +6,7 @@
 #    By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/14 19:44:37 by sarunomane        #+#    #+#              #
-#    Updated: 2025/04/23 11:57:05 by zsonie           ###   ########.fr        #
+#    Updated: 2025/04/25 17:49:46 by zsonie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SOLONG_SRCS =	main.c\
 				player.c\
 				render.c\
 				render_utils.c\
+				parse_utils.c\
 				map.c\
 				maperror.c\
 				error.c

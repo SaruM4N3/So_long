@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:06:42 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/25 15:16:51 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 17:57:41 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,16 @@ static char	*str_custom_errors(char *category, int err)
 			return ("Player count != 1");
 		if (err == ERRMAPEXIT)
 			return ("Exit count != 1");
+		if (err == ERRMAPCOIN)
+			return ("Coin count < 1");
 		if (err == ERRMAPWALL)
 			return ("Map's closed by walls");
 		if (err == ERRMAPPATH)
 			return ("Map path doesnt contain .ber");
+		if (err == ERRNOVALIDMAPPATH)
+			return ("Invalid map path");
+		if (err == ERRNOVALIDPATH)
+			return ("Invalid path between player, coins and exit");
 	}
 	return ("Unknown error\n");
 }

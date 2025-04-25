@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 20:01:48 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/25 14:32:15 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 17:57:00 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 # define ERRMAPEXIT MAPERROR + 5
 # define ERRMAPWALL MAPERROR + 6
 # define ERRMAPPATH MAPERROR + 7
+# define ERRNOVALIDMAPPATH MAPERROR + 8
+# define ERRNOVALIDPATH MAPERROR + 9
+# define ERRMAPCOIN MAPERROR + 10
 
 # define TEXTERR_CATEGORY "Loading texture"
 # define TEXTERROR 2000
