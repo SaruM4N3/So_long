@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:58:57 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/25 17:32:44 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 20:21:19 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static bool	init_env(t_gameenv *env)
 int	main(int ac, char **av)
 {
 	t_gameenv	env;
+	
 	if (ac != 2)
 	{
 		print_error_and_return(ERRNOMAP);

@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:34:45 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/25 18:58:53 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 19:53:55 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ static void	row_checker(t_map *map, int y, char *row)
 {
 	int		x;
 
+	map->width = 0;
+	while (row[map->width])
+		++map->width;
 	x = 0;
-	map->grid[y] = malloc(sizeof(char) * (map->width ));
+	map->grid[y] = malloc(sizeof(char) * (map->width + 1));
 	if (!map->grid[y])
 		return ;
 	while (row[x] && (row[x] != '\n'))
@@ -28,7 +31,6 @@ static void	row_checker(t_map *map, int y, char *row)
 		x++;
 	}
 	map->grid[y][x] = '\0';
-	map->width = x;
 }
 
 static bool	map_check(int fd, t_gameenv *env)
@@ -37,7 +39,7 @@ static bool	map_check(int fd, t_gameenv *env)
 	int		y;
 
 	y = 0;
-	env->map.grid = malloc(sizeof(char *) * (env->map.height ));
+	env->map.grid = malloc(sizeof(char *) * (env->map.height + 1));
 	if (!env->map.grid)
 		return (false);
 	while (y < env->map.height)
@@ -53,28 +55,29 @@ static bool	map_check(int fd, t_gameenv *env)
 	return (true);
 }
 
-void	set_element_pos_and_coins_nb(t_map *map)
+void	set_element_pos_and_coins_nb(t_gameenv *env)
 {
 	int	y;
 	int	x;
 
 	y = -1;
 	x = -1;
-	while (map->grid[++x])
+	env->map.coins_nb = 0;
+	while (env->map.grid[++x])
 	{
-		while (map->grid[x][++y])
+		while (env->map.grid[x][++y])
 		{
-			if (map->grid[x][y] == 'C')
-				map->coins_nb++;
-			if (map->grid[x][y] == MAP_EXIT)
+			if (env->map.grid[x][y] == 'C')
+				env->map.coins_nb++;
+			if (env->map.grid[x][y] == MAP_EXIT)
 			{
-				map->exit_pos.x = y;
-				map->exit_pos.y = x;
+				env->map.exit_pos.x = y;
+				env->map.exit_pos.y = x;
 			}
-			if (map->grid[x][y] == MAP_PLAYERSTART)
+			if (env->map.grid[x][y] == MAP_PLAYERSTART)
 			{
-				map->player_pos.x = y;
-				map->player_pos.y = x;
+				env->map.player_pos.x = y;
+				env->map.player_pos.y = x;
 			}
 		}
 		y = 0;
@@ -91,6 +94,8 @@ static bool	reset_gnl_and_set_map_height(t_map *map)
 		print_error_and_return(ERRNOVALIDMAPPATH);
 		return (false);
 	}
+	map->height = 0;
+	map->width = 0;
 	while (get_next_line(fd))
 		map->height++;
 	close(fd);
@@ -117,7 +122,7 @@ bool	init_map(t_gameenv *env)
 	close(fd);
 	if(!map_parsing_check(env))
 		return (false);
-	set_element_pos_and_coins_nb(&env->map);
+	set_element_pos_and_coins_nb(env);
 	if (env->map.coins_nb < 1)
 		return(print_error_and_return(ERRMAPCOIN));
 	if (check_for_valid_path(env))
