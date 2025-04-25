@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:24:11 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/22 23:14:15 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 21:33:08 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 static int	move_count(void)
 {
-	static int	count = 0;
+	static int	count;
 
+	count = 0;
 	count++;
 	__builtin_printf("MoveCount : %d\n", count);
 	return (count);
@@ -54,7 +55,7 @@ int	move_left(t_player *player, t_map map)
 			map.grid[player->pos.y][player->pos.x] = 'P';
 		}
 		if (map.grid[player->pos.y][player->pos.x] == '0')
-		map.grid[player->pos.y][player->pos.x] = 'P';
+			map.grid[player->pos.y][player->pos.x] = 'P';
 		move_count();
 	}
 	return (0);
@@ -73,7 +74,7 @@ int	move_down(t_player *player, t_map map)
 			map.grid[player->pos.y][player->pos.x] = 'P';
 		}
 		if (map.grid[player->pos.y][player->pos.x] == '0')
-		map.grid[player->pos.y][player->pos.x] = 'P';
+			map.grid[player->pos.y][player->pos.x] = 'P';
 		move_count();
 	}
 	return (0);
@@ -92,8 +93,8 @@ int	move_right(t_player *player, t_map map)
 			map.grid[player->pos.y][player->pos.x] = 'P';
 		}
 		if (map.grid[player->pos.y][player->pos.x] == '0')
-		map.grid[player->pos.y][player->pos.x] = 'P';
-		move_count();	
-	}	
+			map.grid[player->pos.y][player->pos.x] = 'P';
+		move_count();
+	}
 	return (0);
 }

@@ -6,20 +6,20 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:58:57 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/25 20:21:19 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 21:33:27 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/map.h"
 #include "../headers/error.h"
+#include "../headers/map.h"
 #include "../headers/my_mlx.h"
 #include "../headers/so_long.h"
 
 void	close_env(t_gameenv *env)
 {
-	if(env->img.img)
+	if (env->img.img)
 		mlx_destroy_image(env->mlx_ptr, env->img.img);
-	if(env->win_ptr)
+	if (env->win_ptr)
 		mlx_destroy_window(env->mlx_ptr, env->win_ptr);
 	mlx_destroy_display(env->mlx_ptr);
 	free(env->mlx_ptr);
@@ -56,7 +56,7 @@ static bool	init_env(t_gameenv *env)
 int	main(int ac, char **av)
 {
 	t_gameenv	env;
-	
+
 	if (ac != 2)
 	{
 		print_error_and_return(ERRNOMAP);
@@ -75,8 +75,8 @@ int	main(int ac, char **av)
 	mlx_loop_hook(env.mlx_ptr, &handle_no_event, &env);
 	mlx_key_hook(env.win_ptr, &handle_input, &env);
 	mlx_hook(env.win_ptr, DestroyNotify, StructureNotifyMask, &mlx_loop_end,
-			env.mlx_ptr);
+		env.mlx_ptr);
 	mlx_loop(env.mlx_ptr);
 	close_env(&env);
-	return 0;
+	return (0);
 }

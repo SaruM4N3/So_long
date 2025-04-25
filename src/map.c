@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:34:45 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/25 21:18:35 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 21:39:40 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static void	row_checker(t_map *map, int y, char *row)
 {
-	int		x;
+	int	x;
 
 	map->width = 0;
 	while (row[map->width])
@@ -76,8 +76,7 @@ void	set_element_pos_and_coins_nb(t_gameenv *env)
 			}
 			if (env->map.grid[y][x] == MAP_PLAYERSTART)
 			{
-				env->player.pos.x = x;
-				env->player.pos.y = y;				
+				set_player_pos(&env->player, x, y);
 				env->map.player_pos.x = x;
 				env->map.player_pos.y = y;
 			}
@@ -113,7 +112,7 @@ bool	init_map(t_gameenv *env)
 	if (fd < 0)
 	{
 		close(fd);
-		return(false);
+		return (false);
 	}
 	if (!map_check(fd, env))
 	{
@@ -121,12 +120,12 @@ bool	init_map(t_gameenv *env)
 		return (false);
 	}
 	close(fd);
-	if(!map_parsing_check(env))
+	if (!map_parsing_check(env))
 		return (false);
 	set_element_pos_and_coins_nb(env);
 	if (env->map.coins_nb < 1)
-		return(print_error_and_return(ERRMAPCOIN));
+		return (print_error_and_return(ERRMAPCOIN));
 	if (check_for_valid_path(env))
-		return(print_error_and_return(ERRNOVALIDPATH));
+		return (print_error_and_return(ERRNOVALIDPATH));
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 09:04:37 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/25 19:21:27 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 21:30:52 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ static int	check_for_player_and_exit(t_gameenv *env)
 
 static int	check_for_map_char(t_gameenv *env)
 {
-	int		y;
-	int		x;
+	int	y;
+	int	x;
 
 	y = -1;
 	while (env->map.grid[++y])
@@ -54,12 +54,12 @@ static int	check_for_map_char(t_gameenv *env)
 		x = -1;
 		while (env->map.grid[y][++x] && (env->map.grid[y][x] != '\n'))
 		{
-			if (env->map.grid[y][x] == MAP_POSSIBLECHAR[0] || \
-				env->map.grid[y][x] == MAP_POSSIBLECHAR[1] || \
-				env->map.grid[y][x] == MAP_POSSIBLECHAR[2] || \
-				env->map.grid[y][x] == MAP_POSSIBLECHAR[3] || \
-				env->map.grid[y][x] == MAP_POSSIBLECHAR[4] )
-				continue;
+			if (env->map.grid[y][x] == MAP_POSSIBLECHAR[0] ||
+				env->map.grid[y][x] == MAP_POSSIBLECHAR[1] ||
+				env->map.grid[y][x] == MAP_POSSIBLECHAR[2] ||
+				env->map.grid[y][x] == MAP_POSSIBLECHAR[3] ||
+				env->map.grid[y][x] == MAP_POSSIBLECHAR[4])
+				continue ;
 			else
 				return (ERRMAPCHAR);
 		}
@@ -69,12 +69,12 @@ static int	check_for_map_char(t_gameenv *env)
 
 static int	check_for_map_rect(t_gameenv *env)
 {
-	int		y;
-	int		x;
-	int		width;
+	int	y;
+	int	x;
+	int	width;
 
 	y = -1;
-	width = (ft_strlen(env->map.grid[0]) -1);
+	width = (ft_strlen(env->map.grid[0]) - 1);
 	while (env->map.grid[++y])
 	{
 		x = 0;
@@ -88,22 +88,22 @@ static int	check_for_map_rect(t_gameenv *env)
 
 static int	check_for_wall(t_gameenv *env)
 {
-	int		y;
-	int		x;
+	int	y;
+	int	x;
 
 	y = -1;
 	x = -1;
 	while (env->map.grid[++y])
 	{
 		x = -1;
-		if (env->map.grid[y][0] != MAP_WALL || \
+		if (env->map.grid[y][0] != MAP_WALL ||
 			env->map.grid[y][env->map.width - 1] != MAP_WALL)
-		   return (ERRMAPWALL);
+			return (ERRMAPWALL);
 		while (env->map.grid[y][++x] && env->map.grid[y][x] != '\n')
 		{
 			if (env->map.grid[0][x] != MAP_WALL)
 				return (ERRMAPWALL);
-			if (env->map.grid[env->map.height -1][x] != MAP_WALL)
+			if (env->map.grid[env->map.height - 1][x] != MAP_WALL)
 				return (ERRMAPWALL);
 		}
 	}
