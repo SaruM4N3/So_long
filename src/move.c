@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:24:11 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/25 21:33:08 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/25 21:43:53 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 
 static int	move_count(void)
 {
-	static int	count;
+	static int	count = 0;
 
-	count = 0;
 	count++;
 	__builtin_printf("MoveCount : %d\n", count);
 	return (count);
