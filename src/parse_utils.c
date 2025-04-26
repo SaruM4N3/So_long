@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:31:25 by saru              #+#    #+#             */
-/*   Updated: 2025/04/25 21:32:46 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/26 04:48:59 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,19 @@ static void	fill(char **tab, t_2dvector size, t_2dvector cur, char to_fill)
 		return ;
 	if (cur.x > size.x)
 		return ;
-	if (tab[cur.y][cur.x] != to_fill)
+	if (tab[cur.y][cur.x] == '1' || tab[cur.y][cur.x] == 'F')
 		return ;
-	tab[cur.y][cur.x] = 'F';
+	if (tab[cur.y][cur.x] == to_fill || tab[cur.y][cur.x] == 'C')
+		tab[cur.y][cur.x] = 'F';
 	fill(tab, size, (t_2dvector){cur.x - 1, cur.y}, to_fill);
 	fill(tab, size, (t_2dvector){cur.x + 1, cur.y}, to_fill);
 	fill(tab, size, (t_2dvector){cur.x, cur.y - 1}, to_fill);
 	fill(tab, size, (t_2dvector){cur.x, cur.y + 1}, to_fill);
 }
 
-static void	flood_fill(char **tab, t_2dvector size, t_2dvector begin)
+static void	flood_fill(char **tab, int size_x, int size_y, t_2dvector begin)
 {
-	fill(tab, size, begin, '0');
+	fill(tab, (t_2dvector){size_x, size_y}, begin, '0');
 }
 
 static char	**grid_duplicate(t_gameenv *env)
@@ -52,15 +53,14 @@ static char	**grid_duplicate(t_gameenv *env)
 		dup[y] = malloc(sizeof(char) * (env->map.width + 1));
 		if (!dup)
 		{
-			while (--y >= 0)
-				free(dup[y]);
-			free(dup);
+			free_2d(dup, true);
 			return (NULL);
 		}
 		x = -1;
 		while (++x < env->map.width)
 			dup[y][x] = env->map.grid[y][x];
 	}
+	dup[y] = NULL;
 	return (dup);
 }
 
@@ -87,8 +87,7 @@ int	check_for_valid_path(t_gameenv *env)
 	grid = grid_duplicate(env);
 	if (!grid)
 		return (false);
-	flood_fill(grid, (t_2dvector){env->map.width, env->map.height},
-		env->player.pos);
+	flood_fill(grid, env->map.width, env->map.height, env->player.pos);
 	y = -1;
 	while (++y < env->map.height)
 	{
@@ -98,9 +97,9 @@ int	check_for_valid_path(t_gameenv *env)
 			if (grid[y][x] == 'P' || grid[y][x] == 'C' || grid[y][x] == 'E')
 			{
 				if (!check_neighbours(env, grid, (t_2dvector){x, y}, 'F'))
-					return (false);
+					return (free_2d(grid, false));
 			}
 		}
 	}
-	return (true);
+	return (free_2d(grid, true));
 }

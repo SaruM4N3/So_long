@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:04:34 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/25 19:53:46 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/26 02:41:24 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@
 
 void	set_element_pos_and_coins_nb(t_gameenv *env);
 bool	init_map(t_gameenv *env);
-int     check_for_valid_path(t_gameenv *env);
+int		check_for_valid_path(t_gameenv *env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 09:04:37 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/25 21:30:52 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/26 03:43:44 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,9 @@ static int	check_for_wall(t_gameenv *env)
 	while (env->map.grid[++y])
 	{
 		x = -1;
+		ft_printf("");
 		if (env->map.grid[y][0] != MAP_WALL ||
-			env->map.grid[y][env->map.width - 1] != MAP_WALL)
+			env->map.grid[y][env->map.width -1] != MAP_WALL)
 			return (ERRMAPWALL);
 		while (env->map.grid[y][++x] && env->map.grid[y][x] != '\n')
 		{
@@ -112,6 +113,8 @@ static int	check_for_wall(t_gameenv *env)
 
 int	map_parsing_check(t_gameenv *env)
 {
+	if (env->map.height < 3 || env->map.width < 3)
+		return (print_error_and_return(ERRMAPSIZE));
 	if (check_for_map_char(env) == ERRMAPCHAR)
 		return (print_error_and_return(ERRMAPCHAR));
 	else if (check_for_map_rect(env) == ERRMAPISNOTRECT)

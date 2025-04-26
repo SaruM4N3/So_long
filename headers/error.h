@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 20:01:48 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/25 17:57:00 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/26 02:50:10 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,17 @@
 
 // Defines
 # define MAPERR_CATEGORY "Loading map"
-# define MAPERROR 1000
-# define ERRNOMAP MAPERROR + 1
-# define ERRMAPISNOTRECT MAPERROR + 2
-# define ERRMAPCHAR MAPERROR + 3
-# define ERRMAPPLAYER MAPERROR + 4
-# define ERRMAPEXIT MAPERROR + 5
-# define ERRMAPWALL MAPERROR + 6
-# define ERRMAPPATH MAPERROR + 7
-# define ERRNOVALIDMAPPATH MAPERROR + 8
-# define ERRNOVALIDPATH MAPERROR + 9
-# define ERRMAPCOIN MAPERROR + 10
-
-# define TEXTERR_CATEGORY "Loading texture"
-# define TEXTERROR 2000
-# define ERRTEXARGS TEXTERROR + 1
-# define ERRTEXNOFS TEXTERROR + 2
+# define ERRNOMAP 1001
+# define ERRMAPISNOTRECT 1002
+# define ERRMAPCHAR 1003
+# define ERRMAPPLAYER 1004
+# define ERRMAPEXIT 1005
+# define ERRMAPWALL 1006
+# define ERRMAPPATH 1007
+# define ERRNOVALIDMAPPATH 1008
+# define ERRNOVALIDPATH 1009
+# define ERRMAPCOIN 1010
+# define ERRMAPSIZE 1011
 
 // Functions
 
@@ -56,14 +51,16 @@ int	map_parsing_check(t_gameenv *env);
 /**
  * @brief print a custom error message to figure out what's happening
 
-	* @param category: the category of the error ("Loading map" or "Loading texture")
+	* @param category: the category of the error
+	("Loading map" or "Loading texture")
  * @param error: the error code
  * @return: 0
  */
 int	print_custom_error(char *category, int error);
 
 /**
- * @brief Prints an error message corresponding to the given error code and returns 0.
+ * @brief Prints an error message corresponding 
+ * to the given error code and returns 0.
  *
  * @param err The error code to be printed and returned.
  * @return 0.

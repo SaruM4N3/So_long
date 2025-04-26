@@ -6,7 +6,7 @@
 #    By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/14 19:44:37 by sarunomane        #+#    #+#              #
-#    Updated: 2025/04/25 20:57:11 by zsonie           ###   ########.fr        #
+#    Updated: 2025/04/26 02:44:28 by zsonie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,11 +60,11 @@ $(DIR_OBJ)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(LIBFT):
+$(LIBFT): FORCE
 	@echo "$(GREEN)Make libft $(RESET)"
 	$(MAKE) -s -j -C ./libft
 
-$(MLX):
+$(MLX): FORCE
 	$(MAKE) -s -j -C ./minilibx-linux
 
 $(NAME): $(MLX) $(LIBFT) $(DIR_OBJ) $(OBJS) Makefile
@@ -85,6 +85,9 @@ fclean: clean
 re:
 	$(MAKE) -j --no-print-directory fclean
 	$(MAKE) --no-print-directory all
+
+.PHONY: FORCE
+FORCE:
 
 .DEFAULT_GOAL = all
 # COLORS

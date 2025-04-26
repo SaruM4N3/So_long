@@ -6,34 +6,16 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:34:45 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/25 21:42:17 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/26 03:16:27 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/error.h"
 #include "../headers/map.h"
 #include "../headers/so_long.h"
+#include <errno.h>
 
-static void	row_checker(t_map *map, int y, char *row)
-{
-	int	x;
-
-	map->width = 0;
-	while (row[map->width])
-		++map->width;
-	x = 0;
-	map->grid[y] = malloc(sizeof(char) * (map->width + 1));
-	if (!map->grid[y])
-		return ;
-	while (row[x] && (row[x] != '\n'))
-	{
-		map->grid[y][x] = row[x];
-		x++;
-	}
-	map->grid[y][x] = '\0';
-}
-
-static bool	map_check(int fd, t_gameenv *env)
+static bool	init_grid(int fd, t_gameenv *env)
 {
 	char	*row;
 	int		y;
@@ -47,7 +29,7 @@ static bool	map_check(int fd, t_gameenv *env)
 		row = get_next_line(fd);
 		if (!row)
 			return (false);
-		row_checker(&env->map, y, row);
+		env->map.width = ft_strlen(row);
 		env->map.grid[y] = row;
 		y++;
 	}
@@ -86,7 +68,8 @@ void	set_element_pos_and_coins_nb(t_gameenv *env)
 
 static bool	reset_gnl_and_set_map_height(t_map *map)
 {
-	int	fd;
+	int		fd;
+	char	*line;
 
 	fd = open(map->path, O_RDONLY);
 	if (fd < 0)
@@ -95,10 +78,17 @@ static bool	reset_gnl_and_set_map_height(t_map *map)
 		return (false);
 	}
 	map->height = 0;
-	map->width = 0;
-	while (get_next_line(fd))
+	errno = 0;
+	line = get_next_line(fd);
+	while (line)
+	{
 		map->height++;
+		free(line);
+		line = get_next_line(fd);
+	}
 	close(fd);
+	if (errno != 0)
+		return (false);
 	return (true);
 }
 
@@ -110,11 +100,8 @@ bool	init_map(t_gameenv *env)
 		return (false);
 	fd = open(env->map.path, O_RDONLY);
 	if (fd < 0)
-	{
-		close(fd);
 		return (false);
-	}
-	if (!map_check(fd, env))
+	if (!init_grid(fd, env))
 	{
 		close(fd);
 		return (false);
@@ -125,7 +112,7 @@ bool	init_map(t_gameenv *env)
 	set_element_pos_and_coins_nb(env);
 	if (env->map.coins_nb < 1)
 		return (print_error_and_return(ERRMAPCOIN));
-	if (check_for_valid_path(env))
+	if (!check_for_valid_path(env))
 		return (print_error_and_return(ERRNOVALIDPATH));
 	return (true);
 }

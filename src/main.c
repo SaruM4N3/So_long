@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:58:57 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/25 21:33:27 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/26 02:46:30 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,22 @@
 
 void	close_env(t_gameenv *env)
 {
-	if (env->img.img)
-		mlx_destroy_image(env->mlx_ptr, env->img.img);
-	if (env->win_ptr)
-		mlx_destroy_window(env->mlx_ptr, env->win_ptr);
+	if (env->map.grid)
+		free_2d(env->map.grid, true);
+	if (env->img.img_ground)
+		mlx_destroy_image(env->mlx_ptr, env->img.img_ground);
+	if (env->img.img_wall)
+		mlx_destroy_image(env->mlx_ptr, env->img.img_wall);
+	if (env->img.img_collect)
+		mlx_destroy_image(env->mlx_ptr, env->img.img_collect);
+	if (env->img.img_player)
+		mlx_destroy_image(env->mlx_ptr, env->img.img_player);
+	if (env->img.img_player_exit)
+		mlx_destroy_image(env->mlx_ptr, env->img.img_player_exit);
+	if (env->img.img_exit)
+		mlx_destroy_image(env->mlx_ptr, env->img.img_exit);
+	mlx_destroy_image(env->mlx_ptr, env->img.img);
+	mlx_destroy_window(env->mlx_ptr, env->win_ptr);
 	mlx_destroy_display(env->mlx_ptr);
 	free(env->mlx_ptr);
 }
@@ -57,11 +69,9 @@ int	main(int ac, char **av)
 {
 	t_gameenv	env;
 
+	env = (t_gameenv){0};
 	if (ac != 2)
-	{
-		print_error_and_return(ERRNOMAP);
-		return (1);
-	}
+		return (print_error_and_return(ERRNOMAP) + 1);
 	if (!ft_strnstr(av[1], ".ber", ft_strlen(av[1])))
 		return (print_error_and_return(ERRMAPPATH));
 	else
@@ -69,7 +79,10 @@ int	main(int ac, char **av)
 	if (!init_env(&env))
 		return (1);
 	if (!init_map(&env))
+	{
+		close_env(&env);
 		return (1);
+	}
 	env.player = init_player(env.map.player_pos.x, env.map.player_pos.y, &env);
 	init_img_from_xpm(&env);
 	mlx_loop_hook(env.mlx_ptr, &handle_no_event, &env);

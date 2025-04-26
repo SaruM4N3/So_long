@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 20:01:48 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/22 23:41:27 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/26 02:42:28 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,18 +114,21 @@ int				handle_input(int key, t_gameenv *env);
  * @param env A pointer to the game environment structure.
  * 
  * @return An integer value indicating the result of the operation. The specific
- *         return values should be defined based on the application's requirements.
+ *         return values should be defined based on
+ * 	       the application's requirements.
  */
 int				handle_no_event(t_gameenv *env);
 
 // Player
 /**
- * @brief Initializes a player structure with the given position and game environment.
+ * @brief Initializes a player structure
+ *  with the given position and game environment.
  * 
  * @param x The x-coordinate of the player's initial position.
  * @param y The y-coordinate of the player's initial position.
  * @param env Pointer to the game environment structure.
- * @return A t_player structure initialized with the specified position and environment.
+ * @return A t_player structure initialized
+ *  with the specified position and environment.
  */
 t_player		init_player(int x, int y, t_gameenv *env);
 /**
@@ -187,7 +190,7 @@ int				render_img(t_gameenv *env);
  * @param y Y-coordinate where the player image will be rendered.
  */
 void			render_player_img(t_gameenv *env, int x, int y);
- 
+
 /**
  * @brief Renders other images (non-player) at the specified coordinates.
  * 
@@ -197,5 +200,6 @@ void			render_player_img(t_gameenv *env, int x, int y);
  */
 void			render_other_img(t_gameenv *env, int x, int y);
 
+int				free_2d(char **tab, int return_value);
 
 #endif
