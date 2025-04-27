@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:58:57 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/26 02:46:30 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/27 14:08:30 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ static bool	init_env(t_gameenv *env)
 	env->mlx_ptr = mlx_init();
 	if (!env->mlx_ptr)
 		return (false);
-	env->width = 1600;
-	env->height = 900;
+	mlx_get_screen_size(env->mlx_ptr, &env->width, &env->height);
 	env->win_ptr = mlx_new_window(env->mlx_ptr, env->width, env->height,
 			"So_long");
 	if (!env->win_ptr)
@@ -65,6 +64,24 @@ static bool	init_env(t_gameenv *env)
 	return (true);
 }
 
+static int	init_all(t_gameenv *env)
+{
+	if (!init_env(env))
+		return (1);
+	if (!init_map(env))
+	{
+		close_env(env);
+		return (1);
+	}
+	env->player = init_player(env->map.player_pos.x, env->map.player_pos.y, env);
+	if (init_img_from_xpm(env))
+	{
+		close_env(env);
+		return (print_error_and_return(ERRTEXTURE) + 1);
+	}
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_gameenv	env;
@@ -72,23 +89,16 @@ int	main(int ac, char **av)
 	env = (t_gameenv){0};
 	if (ac != 2)
 		return (print_error_and_return(ERRNOMAP) + 1);
-	if (!ft_strnstr(av[1], ".ber", ft_strlen(av[1])))
+	if (!ft_strnstr(av[1], ".ber\0", ft_strlen(av[1]) + 1))
 		return (print_error_and_return(ERRMAPPATH));
 	else
 		env.map.path = av[1];
-	if (!init_env(&env))
-		return (1);
-	if (!init_map(&env))
-	{
-		close_env(&env);
-		return (1);
-	}
-	env.player = init_player(env.map.player_pos.x, env.map.player_pos.y, &env);
-	init_img_from_xpm(&env);
+	if (init_all(&env))
+		return (1);		
 	mlx_loop_hook(env.mlx_ptr, &handle_no_event, &env);
 	mlx_key_hook(env.win_ptr, &handle_input, &env);
 	mlx_hook(env.win_ptr, DestroyNotify, StructureNotifyMask, &mlx_loop_end,
-		env.mlx_ptr);
+			env.mlx_ptr);
 	mlx_loop(env.mlx_ptr);
 	close_env(&env);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 09:04:37 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/26 05:05:47 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/27 13:37:37 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static int	check_for_wall(t_gameenv *env)
 int	map_parsing_check(t_gameenv *env)
 {
 	if (env->map.height < 3 || env->map.width < 3
-		|| env->map.height < MAP_MAXSIZE || env->map.width < MAP_MAXSIZE)
+		|| env->map.height > MAP_MAXSIZE || env->map.width > MAP_MAXSIZE)
 		return (print_error_and_return(ERRMAPSIZE));
 	if (check_for_map_char(env) == ERRMAPCHAR)
 		return (print_error_and_return(ERRMAPCHAR));

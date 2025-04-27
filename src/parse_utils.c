@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:31:25 by saru              #+#    #+#             */
-/*   Updated: 2025/04/26 04:48:59 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/27 13:30:15 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static void	fill(char **tab, t_2dvector size, t_2dvector cur, char to_fill)
 		return ;
 	if (tab[cur.y][cur.x] == '1' || tab[cur.y][cur.x] == 'F')
 		return ;
-	if (tab[cur.y][cur.x] == to_fill || tab[cur.y][cur.x] == 'C')
+	if (tab[cur.y][cur.x] == to_fill || tab[cur.y][cur.x] == 'C'
+		|| tab[cur.y][cur.x] == 'E')
 		tab[cur.y][cur.x] = 'F';
 	fill(tab, size, (t_2dvector){cur.x - 1, cur.y}, to_fill);
 	fill(tab, size, (t_2dvector){cur.x + 1, cur.y}, to_fill);

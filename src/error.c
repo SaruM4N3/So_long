@@ -6,13 +6,24 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:06:42 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/26 05:05:10 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/27 14:04:07 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/error.h"
 #include <errno.h>
 #include <string.h>
+
+static char	*str_custom_errors2( int err)
+{
+	if (err == ERRNOVALIDPATH)
+		return ("Invalid path between player, coins and exit");
+	if (err == ERRMAPSIZE)
+		return ("Invalid map size");
+	if (err == ERRTEXTURE)
+		return ("Texture load failed");
+	return (NULL);
+}
 
 static char	*str_custom_errors(char *category, int err)
 {
@@ -34,12 +45,8 @@ static char	*str_custom_errors(char *category, int err)
 		return ("Map isn't closed by walls");
 	if (err == ERRMAPPATH)
 		return ("Map path doesnt contain .ber");
-	if (err == ERRNOVALIDMAPPATH)
-		return ("Invalid map path");
-	if (err == ERRNOVALIDPATH)
-		return ("Invalid path between player, coins and exit");
-	if (err == ERRMAPSIZE)
-		return ("Invalid map size");
+	if (str_custom_errors2(err))
+		return (str_custom_errors2(err));
 	return ("Unknown error !");
 }
 

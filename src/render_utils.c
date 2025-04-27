@@ -6,24 +6,11 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:49:39 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/25 21:29:54 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/27 13:29:30 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/so_long.h"
-
-int	init_player_img_from_xpm(t_gameenv *env)
-{
-	env->img.img_player_exit = mlx_xpm_file_to_image(env->mlx_ptr,
-			env->img.player_exit_path, &(env->img.width), &(env->img.height));
-	if (!env->img.img_player_exit)
-		return (1);
-	env->img.img_player = mlx_xpm_file_to_image(env->mlx_ptr,
-			env->img.player_path, &(env->img.width), &(env->img.height));
-	if (!env->img.img_player)
-		return (1);
-	return (0);
-}
 
 void	render_player_img(t_gameenv *env, int y, int x)
 {
