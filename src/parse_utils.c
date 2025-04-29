@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:31:25 by saru              #+#    #+#             */
-/*   Updated: 2025/04/29 15:49:44 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/29 22:37:30 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	fill(char **tab, t_2dvector size, t_2dvector cur, char to_fill)
 		return ;
 	if (tab[cur.y][cur.x] == '1' || tab[cur.y][cur.x] == 'F')
 		return ;
-	if (tab[cur.y][cur.x] == to_fill || tab[cur.y][cur.x] == 'C' 
+	if (tab[cur.y][cur.x] == to_fill || tab[cur.y][cur.x] == 'C'
 		|| tab[cur.y][cur.x] == 'E' )
 		tab[cur.y][cur.x] = 'F';
 	fill(tab, size, (t_2dvector){cur.x - 1, cur.y}, to_fill);
@@ -52,7 +52,7 @@ static char	**grid_duplicate(t_gameenv *env)
 	while (++y < env->map.height)
 	{
 		dup[y] = malloc(sizeof(char) * (env->map.width + 1));
-		if (!dup)
+		if (!dup[y])
 		{
 			free_2d(dup, true);
 			return (NULL);

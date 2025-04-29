@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:49:39 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/29 15:48:36 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/29 22:38:46 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ static void	set_path_and_size(t_gameenv *env)
 	env->img.exit_path = "./textures/exit32.xpm";
 }
 
-static int texture_check_and_init(t_gameenv *env, void **img, char *path)
+static int	texture_check_and_init(t_gameenv *env, void **img, char *path)
 {
-	int check;
+	int	check;
 
 	check = open(path, O_RDONLY);
 	if (check < 0)
 		return (1);
 	*img = mlx_xpm_file_to_image(env->mlx_ptr, path,
-		&(env->img.width), &(env->img.height));
+			&(env->img.width), &(env->img.height));
 	if (!img)
 		return (1);
 	close(check);
@@ -53,7 +53,7 @@ int	init_img_from_xpm(t_gameenv *env)
 	if (texture_check_and_init(env, &env->img.img_player, env->img.player_path))
 		return (1);
 	if (texture_check_and_init(env, &env->img.img_player_exit,
-		 env->img.player_exit_path))
+			env->img.player_exit_path))
 		return (1);
 	return (0);
 }

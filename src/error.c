@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:06:42 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/29 15:46:54 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/29 22:35:32 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*str_custom_errors2(int err)
 	if (err == ERRNOVALIDPATH)
 		return ("Invalid path between player, coins and exit");
 	if (err == ERRMAPSIZE)
-		return ("Invalid map size");		
+		return ("Invalid map size");
 	if (err == ERRTEXTURE)
 		return ("Texture cannot be loaded");
 	return ("Unknown error !");

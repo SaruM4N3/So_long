@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:58:57 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/29 15:44:51 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/29 22:37:11 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ static int	init_all(t_gameenv *env)
 		close_env(env);
 		return (1);
 	}
-	env->player = init_player(env->map.player_pos.x, env->map.player_pos.y, env);
+	env->player = init_player(env->map.player_pos.x,
+			env->map.player_pos.y, env);
 	if (init_img_from_xpm(env))
 	{
 		close_env(env);
@@ -94,11 +95,11 @@ int	main(int ac, char **av)
 	else
 		env.map.path = av[1];
 	if (init_all(&env))
-		return (1);		
+		return (1);
 	mlx_loop_hook(env.mlx_ptr, &handle_no_event, &env);
 	mlx_key_hook(env.win_ptr, &handle_input, &env);
 	mlx_hook(env.win_ptr, DestroyNotify, StructureNotifyMask, &mlx_loop_end,
-			env.mlx_ptr);
+		env.mlx_ptr);
 	mlx_loop(env.mlx_ptr);
 	close_env(&env);
 	return (0);
