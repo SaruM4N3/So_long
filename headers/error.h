@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 20:01:48 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/26 02:50:10 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/29 15:19:41 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define ERRNOVALIDPATH 1009
 # define ERRMAPCOIN 1010
 # define ERRMAPSIZE 1011
+# define ERRTEXTURE 1012
 
 // Functions
 

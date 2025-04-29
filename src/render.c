@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:49:39 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/25 21:37:12 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/29 15:16:59 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,45 @@ static void	set_path_and_size(t_gameenv *env)
 {
 	env->img.height = 32;
 	env->img.width = 32;
-	env->img.ground_path = "./ressources/textures/ground32.xpm";
-	env->img.wall_path = "./ressources/textures/wall32.xpm";
-	env->img.coin_path = "./ressources/textures/cat32.xpm";
-	env->img.player_path = "./ressources/textures/player32.xpm";
-	env->img.player_exit_path = "./ressources/textures/player_exit.xpm";
-	env->img.exit_path = "./ressources/textures/exit32.xpm";
+	env->img.ground_path = "./textures/ground32.xpm";
+	env->img.wall_path = "./textures/wall32.xpm";
+	env->img.coin_path = "./textures/cat32.xpm";
+	env->img.player_path = "./textures/player32.xpm";
+	env->img.player_exit_path = "./textures/player_exit.xpm";
+	env->img.exit_path = "./textures/exit32.xpm";
+}
+
+static int texture_check_and_init(t_gameenv *env, void **img, char *path)
+{
+	int check;
+
+	check = open(path, O_RDONLY);
+	if (check < 0)
+		return (1);
+	*img = mlx_xpm_file_to_image(env->mlx_ptr, path,
+		&(env->img.width), &(env->img.height));
+	if (!img)
+		return (1);
+	close(check);
+	return (0);
 }
 
 int	init_img_from_xpm(t_gameenv *env)
 {
 	set_path_and_size(env);
-	env->img.img_wall = mlx_xpm_file_to_image(env->mlx_ptr, env->img.wall_path,
-			&(env->img.width), &(env->img.height));
-	if (!env->img.img_wall)
+	if (texture_check_and_init(env, &env->img.img_wall, env->img.wall_path))
 		return (1);
-	env->img.img_ground = mlx_xpm_file_to_image(env->mlx_ptr,
-			env->img.ground_path, &(env->img.width), &(env->img.height));
-	if (!env->img.img_ground)
+	if (texture_check_and_init(env, &env->img.img_ground, env->img.ground_path))
 		return (1);
-	env->img.img_exit = mlx_xpm_file_to_image(env->mlx_ptr, env->img.exit_path,
-			&(env->img.width), &(env->img.height));
-	if (!env->img.img_exit)
+	if (texture_check_and_init(env, &env->img.img_exit, env->img.exit_path))
 		return (1);
-	env->img.img_collect = mlx_xpm_file_to_image(env->mlx_ptr,
-			env->img.coin_path, &(env->img.width), &(env->img.height));
-	if (!env->img.img_collect)
+	if (texture_check_and_init(env, &env->img.img_collect, env->img.coin_path))
 		return (1);
-	init_player_img_from_xpm(env);
+	if (texture_check_and_init(env, &env->img.img_player, env->img.player_path))
+		return (1);
+	if (texture_check_and_init(env, &env->img.img_player_exit,
+		 env->img.player_exit_path))
+		return (1);
 	return (0);
 }
 

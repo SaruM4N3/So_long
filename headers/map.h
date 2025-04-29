@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:04:34 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/04/26 05:06:37 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/04/29 15:19:29 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # define MAP_EXIT 'E'
 # define MAP_COIN 'C'
 # define MAP_MAXSIZE 1024
-
-# define TEST_MAP_PATH "./ressources/maps/test.ber"
 
 # include "so_long.h"
 
