@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 09:35:03 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/02/19 01:56:26 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/05/02 13:40:36 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ double	get_proc_uptime(void);
 **
 ** @return frames/second
 */
-int	get_frames_per_second(void);
+int		get_frames_per_second(void);
 //////////////////////////////////////////////////////////
 
 /** @name GET_DELTATIME

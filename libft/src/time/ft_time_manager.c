@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 04:13:49 by sarunomane        #+#    #+#             */
-/*   Updated: 2025/02/20 16:53:11 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/05/02 13:59:48 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ double	get_proc_uptime(void)
 	return (time);
 }
 
-int	get_frames_per_second()
+int	get_frames_per_second(void)
 {
 	static double	elapsedtime;
 	static double	lastrealtime;

@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:26:09 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/17 01:29:46 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/05/02 13:40:19 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_coord
 	int	target_y;
 }		t_coord;
 
-enum	colors
+enum	e_colors
 {
 	red = 0x00FF0000,
 	green = 0x0000FF00,

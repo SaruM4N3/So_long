@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarunomane <sarunomane@student.42.fr>      +#+  +:+       +#+        */
+/*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 01:19:01 by zsonie            #+#    #+#             */
-/*   Updated: 2025/02/14 21:33:40 by sarunomane       ###   ########.fr       */
+/*   Updated: 2025/05/02 14:01:17 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/libft.h"
-
 
 static int	ft_check_charset(const char *set, char c)
 {
@@ -32,7 +31,7 @@ static int	ft_check_charset(const char *set, char c)
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*result;
-	size_t	start;	
+	size_t	start;
 	size_t	end;
 	size_t	i;
 

@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:46:44 by zsonie            #+#    #+#             */
-/*   Updated: 2025/04/16 22:59:35 by zsonie           ###   ########.fr       */
+/*   Updated: 2025/05/02 14:06:51 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,26 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 
 void	my_mlx_draw_line(t_img *data, t_coord *coord, int color)
 {
-    float	x;
-    float	y;
-    float	x_inc;
-    float	y_inc;
-    int		steps;
+	float	x;
+	float	y;
+	float	x_inc;
+	float	y_inc;
+	int		steps;
 
-    // Determine the number of steps based on the larger magnitude of dx or dy
-    if ((coord->target_x - coord->pos_x) > (coord->target_y - coord->pos_y))
-        steps = (coord->target_x - coord->pos_x);
-    else
-        steps = (coord->target_y - coord->pos_y);
-    x_inc = (coord->target_x - coord->pos_x) / (float)steps;
-    y_inc = (coord->target_y - coord->pos_y) / (float)steps;
-    x = coord->pos_x;
-    y = coord->pos_y;
-    while (steps-- >= 0)
-    {
-        my_mlx_pixel_put(data, (int)x, (int)y, color);
-        x += x_inc;
-        y += y_inc;
-    }
+	if ((coord->target_x - coord->pos_x) > (coord->target_y - coord->pos_y))
+		steps = (coord->target_x - coord->pos_x);
+	else
+		steps = (coord->target_y - coord->pos_y);
+	x_inc = (coord->target_x - coord->pos_x) / (float)steps;
+	y_inc = (coord->target_y - coord->pos_y) / (float)steps;
+	x = coord->pos_x;
+	y = coord->pos_y;
+	while (steps-- >= 0)
+	{
+		my_mlx_pixel_put(data, (int)x, (int)y, color);
+		x += x_inc;
+		y += y_inc;
+	}
 }
 
 void	my_mlx_draw_square(t_img *data, t_coord *coord, int size, int color)
@@ -65,13 +64,12 @@ void	my_mlx_draw_square(t_img *data, t_coord *coord, int size, int color)
 
 void	my_mlx_draw_tester(t_img data)
 {
-	t_coord coord;
+	t_coord	coord;
 
 	coord.pos_x = 100;
 	coord.pos_y = 100;
 	coord.target_x = 300;
 	coord.target_y = 600;
-
 	my_mlx_draw_square(&data, &coord, 10, red);
 	my_mlx_draw_square(&data, &coord, 20, green);
 	my_mlx_draw_square(&data, &coord, 30, blue);

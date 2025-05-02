@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarunomane <sarunomane@student.42.fr>      +#+  +:+       +#+        */
+/*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 04:06:56 by zsonie            #+#    #+#             */
-/*   Updated: 2025/02/22 09:56:35 by sarunomane       ###   ########.fr       */
+/*   Updated: 2025/05/02 14:02:06 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ static int	ft_base_is_valid(char *base)
 	}
 	return (0);
 }
+
 static void	secure_write(int fd, char *c, size_t n)
 {
 	if (!write(fd, c, n))
-		return;
+		return ;
 }
+
 void	ft_putnbr_int(int n, int fd, size_t *fsize)
 {
 	unsigned int	un;
